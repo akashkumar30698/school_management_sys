@@ -1,10 +1,11 @@
+require("dotenv").config()
+
+
 const express = require("express");
-const dotenv = require("dotenv");
 const cors = require("cors");
 const { initializeDatabase } = require("./config/dbConnect");
 const router = require("./routes/schoolRoutes");
 
-dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 8000;
