@@ -2,20 +2,24 @@ const mysql = require("mysql2/promise");
 const dotenv = require("dotenv");
 dotenv.config();
 
+// Connection
 const pool = mysql.createPool({
-  host: process.env.DB_HOST || "localhost",
-  user: process.env.DB_USER || "root",
-  password: process.env.DB_PASSWORD || "",
-  database: process.env.DB_NAME || "school_management_system",  
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
+  host: `${process.env.MYSQLHOST}`,  
+  user: `${process.env.MYSQLUSER}`,                   
+  password: `${process.env.MYSQLPASSWORD}`,
+  database: `${process.env.MYSQLDATABASE}`,             
+  port: 35923,                     
+  waitForConnections: true, 
+  connectionLimit: 10,     
+  queueLimit: 0
 });
 
 // Function to initialize database and create tables
 async function initializeDatabase() {
   try {
-    const connection = await pool.getConnection();
+    console.log("🔄 Connecting to the database...");
+    
+    const connection = await pool.getConnection(); 
 
     console.log("✅ Connected to the database successfully!");
 
